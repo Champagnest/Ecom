@@ -2,10 +2,28 @@ const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
+router.post('/', (req, res) => {
+  // create a new category
+  // validate req.body has all appropriate parts ('category_name')
+  // if ( !req.body.category_name ) {
+  //   return res.status( 400 ).json( { message: 'Category Incomplete' } );
+  // }
+
+  // Category.create( {
+  //   category_name: req.body.category_name
+  // }, {
+  // } )
+  //   .then( dbCategory => res.status( 200 ).json( dbCategory ) )
+  //   .catch( err => {
+  //     console.log( err );
+  //     res.status( 500 ).json( err );
+  //   } )
+});
 
 router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
+  console.log('test');
   Category.findAll()
     .then( dbCategories => res.status( 200 ).json( dbCategories ) )
     .catch( err => {
@@ -40,23 +58,7 @@ router.get('/:id', (req, res) => {
     } )
 });
 
-router.post('/', (req, res) => {
-  // create a new category
-  // validate req.body has all appropriate parts ('category_name')
-  if ( !req.body.category_name ) {
-    return res.status( 400 ).json( { message: 'Category Incomplete' } );
-  }
 
-  Category.create( {
-    category_name: req.body.category_name
-  }, {
-  } )
-    .then( dbCategory => res.status( 200 ).json( dbCategory ) )
-    .catch( err => {
-      console.log( err );
-      res.status( 500 ).json( err );
-    } )
-});
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
